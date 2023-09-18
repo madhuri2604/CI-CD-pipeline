@@ -1,37 +1,42 @@
-pipeline{
+pipeline {
     agent any
+ 
     environment {
-        GOOGLE_CLOUD_KEYFILE_JSON = credentials('gcp-key') 
-        GOOGLE_CLOUD_PROJECT_ID = 'new-project-399404' 
+        GOOGLE_APPLICATION_CREDENTIALS = credentials('new-project')
+        PROJECT_ID = 'new-project-399404'
+        REGION = 'us-central1' 
+        IMAGE_NAME = 'my-repo/app-backend'
+        IMAGE_TAG = 'v1'
     }
-    stages{
-        stage("Clean Up"){
+ 
+    stages {
+        stage("clear") {
             steps {
                 deleteDir()
             }
         }
-        stage("clone repo"){
+        
+        stage("git clone") {
             steps {
                 sh "git clone https://github.com/madhuri2604/docker-backend.git"
             }
         }
-        stage("Build"){
-            steps{
-                
+        
+        stage('Build and Push Docker Image') {
+            steps {
                 dir("docker-backend"){
-                    script{
-                        sh """
-                         "gcloud auth activate-service-account --key-file=$GOOGLE_CLOUD_KEYFILE_JSON"
-                         "gcloud container clusters get-credentials cluster-1 --zone us-central1-c --project $GOOGLE_CLOUD_PROJECT_ID"
-                         "sudo docker build -t us-central1-docker.pkg.dev/new-project-399404/my-repo/app-backend:v2 . "
-                         "sudo docker push us-central1-docker.pkg.dev/new-project-399404/my-repo/app-backend:v2"
-                        """ 
-                    }
+                    script {
+                      sh """  
+                         "sudo gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS"
+                         "sudo gcloud config set project $PROJECT_ID"
+                         "sudo gcloud auth configure-docker $REGION-docker.pkg.dev --quiet"
+                         "sudo docker build -t $REGION-docker.pkg.dev/$PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG ."
+                         "sudo docker push $REGION-docker.pkg.dev/$PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG"
+                      """ 
                 }
-                
-                            
+                }
             }
         }
-
     }
+
 }
