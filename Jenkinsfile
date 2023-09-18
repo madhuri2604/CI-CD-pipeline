@@ -2,7 +2,7 @@ pipeline{
     agent any
     environment {
         GOOGLE_CLOUD_KEYFILE_JSON = credentials('CI') 
-        GOOGLE_CLOUD_PROJECT_ID = '	new-project-399404' 
+        GOOGLE_CLOUD_PROJECT_ID = 'new-project-399404' 
     }
     stages{
         stage("Clean Up"){
