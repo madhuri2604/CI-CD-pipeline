@@ -6,7 +6,7 @@ pipeline {
         PROJECT_ID = 'new-project-399404'
         REGION = 'us-central1' 
         IMAGE_NAME = 'my-repo/app-backend'
-        IMAGE_TAG = 'v1'
+        IMAGE_TAG = 'v2'
     }
  
     stages {
