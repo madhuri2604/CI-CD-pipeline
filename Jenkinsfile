@@ -27,13 +27,13 @@ pipeline {
                 dir("docker-backend"){
                     script {
                       sh '''  
-                         "sudo gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS"
+                         "sudo gcloud auth activate-service-account --key-file= $GOOGLE_APPLICATION_CREDENTIALS "
                          "sudo gcloud config set project $PROJECT_ID"
                          "sudo gcloud auth configure-docker $REGION-docker.pkg.dev --quiet"
                          "sudo docker build -t $REGION-docker.pkg.dev/$PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG ."
                          "sudo docker push $REGION-docker.pkg.dev/$PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG"
                       '''
-                }
+                    }
                 }
             }
         }
