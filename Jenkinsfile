@@ -2,7 +2,7 @@ pipeline {
     agent any
  
     environment {
-        GOOGLE_APPLICATION_CREDENTIALS = credentials('new-project')
+        GOOGLE_APPLICATION_CREDENTIALS = credentials('gcp-key')
         PROJECT_ID = 'new-project-399404'
         REGION = 'us-central1' 
         IMAGE_NAME = 'my-repo/app-backend'
