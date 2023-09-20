@@ -4,7 +4,7 @@ pipeline {
     environment {
         Last_Commit_Id = "${env.GIT_COMMIT}"
         GOOGLE_APPLICATION_CREDENTIALS = credentials('gcp-key')
-        PROJECT_ID = 'new-project-399404'
+        PROJECT_ID = 'jenkins-399608'
         REGION = 'us-central1'  
         IMAGE_NAME = 'docker-repo/backend-1'
         IMAGE_TAG = "${Last_Commit_Id}"
@@ -39,7 +39,7 @@ pipeline {
                     script {
                         sh '''
                              gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
-                             gcloud config set project new-project-399404
+                             gcloud config set project $PROJECT_ID
                              gcloud auth configure-docker $REGION-docker.pkg.dev --quiet
                              #sudo gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://$REGION-docker.pkg.dev
                              sudo docker build -t $REGION-docker.pkg.dev/$PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG .
