@@ -54,7 +54,7 @@ pipeline {
                 dir("helm-chart"){
                     script{
                         sh '''
-                            gcloud container clusters get-credentials cluster-1 --zone us-central1-c --project new-project-399404
+                            #gcloud container clusters get-credentials cluster-1 --zone us-central1-c --project new-project-399404
                             helm install uchart demochart
                         '''
                     }
