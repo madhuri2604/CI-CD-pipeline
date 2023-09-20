@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         Last_Commit_Id = "${env.GIT_COMMIT}"
-        GOOGLE_APPLICATION_CREDENTIALS = credentials('gcp-key')
+        GOOGLE_APPLICATION_CREDENTIALS = credentials('key-1')
         PROJECT_ID = 'jenkins-399608'
         REGION = 'us-central1'  
         IMAGE_NAME = 'docker-repo/backend-1'
