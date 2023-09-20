@@ -19,7 +19,8 @@ pipeline {
 
         stage("Clone") {
             steps {
-                sh "git clone https://github.com/madhuri2604/docker-backend.git"    
+                sh "git clone https://github.com/madhuri2604/docker-backend.git"
+                sh "git clone https://github.com/madhuri2604/helm-chart.git"
             }
         }
         
@@ -44,6 +45,16 @@ pipeline {
                              sudo docker push $REGION-docker.pkg.dev/$PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG
                         '''
                     }
+                }
+            }
+        }
+        stage("deployment") {
+            steps {
+                script{
+                    sh '''
+                        gcloud container clusters get-credentials cluster-1 --zone us-central1-c --project new-project-399404
+                        
+                    '''
                 }
             }
         }
