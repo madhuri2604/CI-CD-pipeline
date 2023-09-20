@@ -41,7 +41,7 @@ pipeline {
                              gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
                              gcloud config set project $PROJECT_ID
                              gcloud auth configure-docker $REGION-docker.pkg.dev --quiet
-                             gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://$REGION-docker.pkg.dev
+                             sudo gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://$REGION-docker.pkg.dev
                              sudo docker build -t $REGION-docker.pkg.dev/$PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG .
                              sudo docker push $REGION-docker.pkg.dev/$PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG
                         '''
