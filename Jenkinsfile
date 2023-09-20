@@ -24,14 +24,14 @@ pipeline {
             }
         }
         
-        stage("approval") {
-            options {
-                timeout(time: 1, unit: 'MINUTES')
-            }
-            steps {
-                input message: "Please approve to proceed with deployment", submitter: "your-approver-user"
-            }
-        }
+        // stage("approval") {
+        //     options {
+        //         timeout(time: 1, unit: 'MINUTES')
+        //     }
+        //     steps {
+        //         input message: "Please approve to proceed with deployment", submitter: "your-approver-user"
+        //     }
+        // }
 
         stage('Build and Push Docker Image') {
             steps {
