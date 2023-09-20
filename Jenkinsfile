@@ -54,6 +54,7 @@ pipeline {
                     script{
                         sh '''
                             gcloud container clusters get-credentials cluster-1 --zone us-central1-c --project jenkins-399608
+                            gcloud components install kubectl
                             helm lint
                             helm install uchart demochart
                         '''
