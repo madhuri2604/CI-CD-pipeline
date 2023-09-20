@@ -38,7 +38,7 @@ pipeline {
                 dir("docker-backend") {
                     script {
                         sh '''
-                             gcloud auth activate-service-account --key-file=credentials('key-1')
+                             gcloud auth activate-service-account --key-file= "credentials('key-1')"
                              gcloud config set project $PROJECT_ID
                              gcloud auth configure-docker $REGION-docker.pkg.dev --quiet
                              #sudo gcloud auth print-access-token | docker login -u oauth2accesstoken --password-stdin https://$REGION-docker.pkg.dev
