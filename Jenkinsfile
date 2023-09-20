@@ -54,7 +54,7 @@ pipeline {
                     script{
                         sh '''
                             sudo apt-get install kubectl
-                            gcloud container clusters get-credentials cluster-1 --zone us-central1-c --project jenkins-399608
+                            sudo gcloud container clusters get-credentials cluster-1 --zone us-central1-c --project jenkins-399608
                             helm lint
                             helm install uchart demochart
                         '''
