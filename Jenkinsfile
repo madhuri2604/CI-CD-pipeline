@@ -37,13 +37,13 @@ pipeline {
             steps {
                 dir("docker-backend") {
                     script {
-                        withCredentials([file(credentialsId: 'new-jenkins', variable: 'KEY_FILE')]) {
-                            sh "sudo gcloud auth activate-service-account --key-file=$KEY_FILE"
-                            sh "sudo gcloud config set project $PROJECT_ID"
-                            sh "sudo gcloud auth configure-docker $REGION-docker.pkg.dev --quiet"
-                        }
-                        sh "sudo docker build -t $REGION-docker.pkg.dev/$PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG ."
-                        sh "sudo docker push $REGION-docker.pkg.dev/$PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG"
+                        sh '''
+                            sudo gcloud auth activate-service-account --key-file=$KEY_FILE
+                            sudo gcloud config set project $PROJECT_ID
+                            sudo gcloud auth configure-docker $REGION-docker.pkg.dev --quiet
+                            sudo docker build -t $REGION-docker.pkg.dev/$PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG .
+                            sudo docker push $REGION-docker.pkg.dev/$PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG
+                        '''
                     }
                 }
             }
@@ -53,7 +53,8 @@ pipeline {
                 dir("helm-chart"){
                     script{
                         sh '''
-                            #gcloud container clusters get-credentials cluster-1 --zone us-central1-c --project new-project-399404
+                            gcloud container clusters get-credentials cluster-1 --zone us-central1-c --project jenkins-399608
+                            helm lint
                             helm install uchart demochart
                         '''
                     }
