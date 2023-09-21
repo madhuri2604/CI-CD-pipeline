@@ -48,20 +48,20 @@ pipeline {
                 }
             }
         }
-        stage("deployment") {
-            steps {
-                dir("helm-chart"){
-                    script{
-                        sh '''
-                            sudo apt-get install kubectl
-                            sudo apt-get install google-cloud-sdk-gke-gcloud-auth-plugin
-                            sudo gcloud container clusters get-credentials cluster-1 --zone us-central1-c --project jenkins-399608
-                            helm lint
-                            helm install uchart /demochart
-                        '''
-                    }
-                }
-            }
-        }
+        // stage("deployment") {
+        //     steps {
+        //         dir("helm-chart"){
+        //             script{
+        //                 sh '''
+        //                     sudo apt-get install kubectl
+        //                     sudo apt-get install google-cloud-sdk-gke-gcloud-auth-plugin
+        //                     sudo gcloud container clusters get-credentials cluster-1 --zone us-central1-c --project jenkins-399608
+        //                     helm lint
+        //                     helm install uchart /demochart
+        //                 '''
+        //             }
+        //         }
+        //     }
+        // }
     }
 }
