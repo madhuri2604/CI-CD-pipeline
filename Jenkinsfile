@@ -44,7 +44,7 @@ pipeline {
           steps{
                 dir("helm-chart"){
                     sh '''
-cat <<EOL >> values.yaml
+cat > values.yaml << EOL
 # Default values for mychart.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
@@ -120,23 +120,5 @@ EOL
                 }
           }
         }
-        stage("deployment") {
-            steps {
-                
-                script{
-                    sh '''
-                        sudo gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
-                        sudo apt-get install kubectl
-                        sudo apt-get install google-cloud-sdk-gke-gcloud-auth-plugin
-                        sudo gcloud container clusters get-credentials cluster-1 --zone us-central1-c --project jenkins-399608
-
-                    '''
-                }
-                dir("helm-chart"){
-                    sh "helm lint" 
-                }
-                sh  "sudo helm upgrade ichart ./helm-chart/"
-            }
-        }      
     }
 }
