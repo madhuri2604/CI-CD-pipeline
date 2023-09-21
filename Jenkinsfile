@@ -44,70 +44,70 @@ pipeline {
           steps{
                 dir("helm-chart"){
                     sh '''
-                    cat <<EOF > values.yaml
-                    # Default values for mychart.
-                    # This is a YAML-formatted file.
-                    # Declare variables to be passed into your templates.
-                    
-                    replicaCount: 2
-                    
-                    imagePullSecrets: []
-                    nameOverride: ""
-                    fullnameOverride: ""
-                    
-                    serviceAccount:
-                      # Specifies whether a service account should be created
-                      create: true
-                      # Annotations to add to the service account
-                      annotations: {}
-                      # The name of the service account to use.
-                      # If not set and create is true, a name is generated using the fullname template
-                      name: ""
-                    
-                    podAnnotations: {}
-                    
-                    podSecurityContext: {}
-                      # fsGroup: 2000
-                    
-                    securityContext: {}
-                      # capabilities:
-                      #   drop:
-                      #   - ALL
-                      # readOnlyRootFilesystem: true
-                      # runAsNonRoot: true
-                      # runAsUser: 1000
-                    
-                    service:
-                      port: 80
-                    
-                    resources: {}
-                    
-                    autoscaling:
-                      enabled: false
-                      minReplicas: 1
-                      maxReplicas: 100
-                      targetCPUUtilizationPercentage: 80
-                      # targetMemoryUtilizationPercentage: 80
-                    
-                    nodeSelector: {}
-                    
-                    tolerations: []
-                    
-                    affinity: {}
-                    
-                    backend:
-                      image:
-                        repository: $REGION-docker.pkg.dev/$PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG
-                      targetPort: 5000
-                      servicetype: LoadBalancer
-                    
-                    frontend:
-                      image:
-                        repository: us-central1-docker.pkg.dev/jenkins-399608/repo/frontend1:v1
-                      targetPort: 80
-                      servicetype: LoadBalancer
-                    EOF
-                    cat values.yaml
+                        cat <<EOL > values.yaml
+                        # Default values for mychart.
+                        # This is a YAML-formatted file.
+                        # Declare variables to be passed into your templates.
+                        
+                        replicaCount: 2
+                        
+                        imagePullSecrets: []
+                        nameOverride: ""
+                        fullnameOverride: ""
+                        
+                        serviceAccount:
+                          # Specifies whether a service account should be created
+                          create: true
+                          # Annotations to add to the service account
+                          annotations: {}
+                          # The name of the service account to use.
+                          # If not set and create is true, a name is generated using the fullname template
+                          name: ""
+                        
+                        podAnnotations: {}
+                        
+                        podSecurityContext: {}
+                          # fsGroup: 2000
+                        
+                        securityContext: {}
+                          # capabilities:
+                          #   drop:
+                          #   - ALL
+                          # readOnlyRootFilesystem: true
+                          # runAsNonRoot: true
+                          # runAsUser: 1000
+                        
+                        service:
+                          port: 80
+                        
+                        resources: {}
+                        
+                        autoscaling:
+                          enabled: false
+                          minReplicas: 1
+                          maxReplicas: 100
+                          targetCPUUtilizationPercentage: 80
+                          # targetMemoryUtilizationPercentage: 80
+                        
+                        nodeSelector: {}
+                        
+                        tolerations: []
+                        
+                        affinity: {}
+                        
+                        backend:
+                          image:
+                            repository: $REGION-docker.pkg.dev/$PROJECT_ID/$IMAGE_NAME:$IMAGE_TAG
+                          targetPort: 5000
+                          servicetype: LoadBalancer
+                        
+                        frontend:
+                          image:
+                            repository: us-central1-docker.pkg.dev/jenkins-399608/repo/frontend1:v1
+                          targetPort: 80
+                          servicetype: LoadBalancer
+                        EOL
+                        cat values.yaml
                     '''
 
                 }
