@@ -113,6 +113,12 @@ pipeline {
                 }
             }
         }
-
+        stage('Change'){
+          steps{
+                dir("helm-chart"){
+                    sh "cat values.yaml"
+                }
+          }
+        }   
     }
 }
