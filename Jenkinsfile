@@ -44,7 +44,7 @@ pipeline {
           steps{
                 dir("helm-chart"){
                   sh '''
-                      echo <<EOF > values.yaml
+                        cat <<EOF > values.yaml
                         # Default values for mychart.
                         # This is a YAML-formatted file.
                         # Declare variables to be passed into your templates.
@@ -109,8 +109,8 @@ pipeline {
                             repository: us-central1-docker.pkg.dev/jenkins-399608/repo/frontend1:v1
                           targetPort: 80
                           servicetype: LoadBalancer
-                      EOF
-                      cat values.yaml
+                          EOF
+                          cat values.yaml
                   '''
                 }
             }
