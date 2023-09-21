@@ -44,7 +44,7 @@ pipeline {
           steps{
                 dir("helm-chart"){
                     sh '''
-                        cat <<EOL > values.yaml
+                        cat <<EOL >> values.yaml
                         # Default values for mychart.
                         # This is a YAML-formatted file.
                         # Declare variables to be passed into your templates.
