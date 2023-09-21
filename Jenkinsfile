@@ -109,8 +109,8 @@ pipeline {
                             repository: us-central1-docker.pkg.dev/jenkins-399608/repo/frontend1:v1
                           targetPort: 80
                           servicetype: LoadBalancer
-                          EOF
-                          cat values.yaml
+                        EOF
+                        cat values.yaml
                   '''
                 }
             }
