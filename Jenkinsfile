@@ -113,10 +113,14 @@ EOL
                 }
             }
         }
-        stage('Change'){
+        stage('Push to github'){
           steps{
                 dir("helm-chart"){
-                    sh "cat values.yaml"
+                    sh '''
+                      git add values.yaml
+                      git commit -m "Update file with new image"
+                      git push
+                    '''  
                 }
           }
         }
