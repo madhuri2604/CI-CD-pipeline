@@ -19,7 +19,7 @@ pipeline {
 
         stage("Clone") {
             steps {
-                sh "git clone https://github.com/madhuri2604/docker-backend.git"
+                sh "git clone https://github.com/madhuri2604/CI/CD-pipeline.git"
                 sh "git clone https://github.com/madhuri2604/helm-chart.git"
             }
         }
@@ -27,7 +27,7 @@ pipeline {
 
         stage('Build and Push Docker Image') {
             steps {
-                dir("docker-backend") {
+                dir("CI/CD-pipeline") {
                     script {
                         sh '''
                             sudo gcloud auth activate-service-account --key-file=$GOOGLE_APPLICATION_CREDENTIALS
