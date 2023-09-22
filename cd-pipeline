@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         
-        GOOGLE_APPLICATION_CREDENTIALS = credentials('new-project-1')
+        GOOGLE_APPLICATION_CREDENTIALS = credentials('new-jenkins')
         PROJECT_ID = 'jenkins-399608'
         REGION = 'us-central1'  
         
